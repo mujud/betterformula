@@ -1,0 +1,12 @@
+:host {
+	display: flex;
+    height: 400px;
+    margin: 5px 10px;
+}
+#bt-frmla { 
+    width: 80%;
+    border: 1px solid #8198ac;
+}
+app-sidekick{
+    width: 20%;
+}
