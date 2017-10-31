@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { TabService } from './services/tab.service';
 import { IdeComponent } from './components/ide/ide.component';
 import { SidekickComponent } from './components/sidekick/sidekick.component'
+import { AceService } from './services/ace.service'
 
 
 @NgModule({
@@ -16,7 +17,7 @@ import { SidekickComponent } from './components/sidekick/sidekick.component'
   imports: [
     BrowserModule
   ],
-  providers: [TabService],
+  providers: [TabService,AceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
