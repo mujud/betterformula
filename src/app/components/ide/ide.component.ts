@@ -10,8 +10,9 @@ export class IdeComponent implements OnInit {
   constructor(private aceservice: AceService) { }
   formulaText: HTMLInputElement
   ngOnInit() {
-    this.aceservice.init()
-    /*this.formulaText = document.getElementsByClassName('FormulaText')[0] as HTMLInputElement
+    this.formulaText = document.getElementsByClassName('FormulaText')[0] as HTMLInputElement
+    this.aceservice.init(this.formulaText)
+    /*
   	ace.require("ace/ext/language_tools");
     var editor = ace.edit("bt-frmla");
     editor.setTheme("ace/theme/idle_fingers");

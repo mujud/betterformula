@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+.ace_formulafunction{
+	color:#cddc39;
+}
+.ace_fields{
+	color:#63c7be;
+}
+.ace-idle-fingers .ace_marker-layer .ace_bracket{
+	border: 1px solid #9E9E9E!important;
+}
+.ace_completion-highlight {
+    color: #a82121!important;
+    text-shadow: none!important;
+}

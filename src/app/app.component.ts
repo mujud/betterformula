@@ -1,5 +1,6 @@
 import { Component,OnInit } from '@angular/core'
 import { TabService } from './services/tab.service'
+declare var fieldTreeController,FormulaEditor
 @Component({
   selector: 'app-root',
   template: `
@@ -13,6 +14,6 @@ export class AppComponent implements OnInit  {
   	console.log("started");
   }
   ngOnInit() {
-    this.tabService.getTabActivatorObservable().subscribe(value => this.activate = value)
+    this.tabService.getTabActivatorObservable().subscribe(value => typeof fieldTreeController == "undefined" ? FormulaEditor.switchMode('advanced') : this.activate = value)
   }
 }

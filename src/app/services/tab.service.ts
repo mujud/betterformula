@@ -9,6 +9,10 @@ export class TabService {
 		this.advancedForumlatabButton = document.getElementsByClassName("miniTabList")[0].children[1]
 		this.activeObserver = new Observable((observer) => this.subscriber(observer))
 		this.advancedForumla = (document.getElementsByClassName("miniTabOn")[0] as HTMLElement)
+		this.calculatedFormula = (document.getElementById("CalculatedFormula") as HTMLElement)
+		this.calculatedFormulaHeader = (document.getElementById("CalculatedFormula_header") as HTMLElement)
+		this.calculatedFormulaFooter = (document.getElementById("CalculatedFormula_footer") as HTMLElement)
+		this.calculatedFormulaFunctions = (document.getElementById("CalculatedFormula_functions") as HTMLElement)
 
 	}
 	private activeObserver: Observable<boolean>
@@ -16,6 +20,10 @@ export class TabService {
 	private betterForumlatabButton;
 	private advancedForumlatabButton;
 	private advancedForumla;
+	private calculatedFormula
+	private calculatedFormulaHeader
+	private calculatedFormulaFooter
+	private calculatedFormulaFunctions
 	private subscriber(observer){
 		this.showHide(observer,this.betterForumlatabButton,this.advancedForumlatabButton,true);
 		this.showHide(observer,this.advancedForumlatabButton,this.betterForumlatabButton,false);
@@ -26,7 +34,11 @@ export class TabService {
 			this.isActive = state;
 			activeBt.className = "currentTab";
 			inactiveBT.className = "";
-			this.advancedForumla.style.display = state ? "none" : "block"
+			// this.advancedForumla.style.display = state ? "none" : "block"
+			this.calculatedFormula.style.display = state ? "none" : "block"
+			this.calculatedFormulaHeader.style.display = state ? "none" : "block"
+			this.calculatedFormulaFooter.style.display = state ? "none" : "block"
+			this.calculatedFormulaFunctions.style.display = state ? "none" : "block"
 			observer.next(this.isActive)
 		});
 	}

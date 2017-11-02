@@ -1,10 +1,45 @@
+declare var fieldTreeController
 export class HighlightRules  {
+    private static buildFields(){
+        var fields = ""
+        fieldTreeController.tree.rootList[0].children.forEach( el => {
+            fields +=el.key+"|"
+            if(el.attributes.type == "Lookup" && !el.isLeaf){
+                fields += this.buildChildrenKeyWord(el)
+            }
+        })
+        for(var i = 1 ; i <  fieldTreeController.tree.rootList.length ; i++){
+            fields +=fieldTreeController.tree.rootList[i].key+"|"
+            fieldTreeController.tree.rootList[i].children.forEach( childEl => {
+                fields += childEl.key+"|"
+            })
+        }
+        return fields.substring(0, fields.length - 1);
+    }
+    private static buildChildrenKeyWord(el){
+        var fields = "";
+        el.children.forEach( childEl => {
+            var isValid = true
+            var type = childEl.attributes.type
+            var val = childEl.key
+            if(!childEl.isLeaf && type == "Lookup"){
+                if(childEl.hasOwnProperty("children"))
+                    this.buildChildrenKeyWord(el)
+                else
+                    isValid = false
+            }
+            if(isValid)
+                fields += val+"|"
+        })
+        return fields;
+    }
     public static factory(require){
         var oop = require("ace/lib/oop");
         var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
+        var that = this
         var betterformulaHighlightRules = function(){
             var keywords = (
-            "DATE|DATEVALUE|CASE|BR|IF|HYPERLINK|CONTAINS|CEILING"
+            "DATE|DATEVALUE|CASE|BR|IF|HYPERLINK|CONTAINS|CEILING|SUBSTITUTE"
             );
             var builtinConstants = (
                 "true|false|inf|Inf|nan|NaN|eps|pi|ans|nargin|nargout|varargin|varargout"
@@ -15,7 +50,9 @@ export class HighlightRules  {
             var keywordMapper = this.createKeywordMapper({
                 "support.function": builtinFunctions,
                 "keyword": keywords,
-                "constant.language": builtinConstants
+                "constant.language": builtinConstants,
+                "formulafunction": "Oppo",
+                "fields": that.buildFields()
             }, "identifier", true);
             this.$rules = {
                     // allowQstring
