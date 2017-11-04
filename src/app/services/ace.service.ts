@@ -5,7 +5,7 @@ import { Completions } from '../classes/completions';
 import { MatchingBraceOutdent } from '../classes/matching-brace-outdent';
 import { FoldMode } from '../classes/fold-mode';
 import { BaseFoldMode } from '../classes/base-fold-mode';
-
+declare var $
 @Injectable()
 export class AceService {
   editor
@@ -41,7 +41,24 @@ export class AceService {
         enableLiveAutocompletion: false
     });
     this.editor.setValue(el.value,1)
-    this.editor.getSession().on('change', _ => el.value = this.editor.getValue())
+    this.editor.getSession().on('change', _ =>{ 
+      el.value = this.editor.getValue()
+      
+    })
+    this.editor.getSelection().on('changeCursor', _ =>{ 
+      var position = this.editor.getCursorPosition()
+      var selectionStart = position.column;
+      var text = el.value.split("\n")
+      for(var i = 0; i < position.row; i++ ){
+        selectionStart += text[i].length
+        selectionStart++//for county new line character
+      }
+      console.log("length is:"+selectionStart)
+      console.log($(el))
+      $(el)[0].selectionStart = selectionStart
+      $(el)[0].selectionEnd = selectionStart
+    })
+    $(document).on("click","#fieldInsertButton",_ =>this.editor.setValue(el.value,1))
     console.log(this.editor)
   }
   public recalculate(){

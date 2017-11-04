@@ -1,46 +1,45 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable'
-
+declare var $,FormulaEditor
 @Injectable()
 export class TabService {
 	constructor() { 
-		console.log("loading tab")
-		this.betterForumlatabButton = document.getElementsByClassName("launch-better-formula")[0]
-		this.advancedForumlatabButton = document.getElementsByClassName("miniTabList")[0].children[1]
 		this.activeObserver = new Observable((observer) => this.subscriber(observer))
-		this.advancedForumla = (document.getElementsByClassName("miniTabOn")[0] as HTMLElement)
-		this.calculatedFormula = (document.getElementById("CalculatedFormula") as HTMLElement)
-		this.calculatedFormulaHeader = (document.getElementById("CalculatedFormula_header") as HTMLElement)
-		this.calculatedFormulaFooter = (document.getElementById("CalculatedFormula_footer") as HTMLElement)
-		this.calculatedFormulaFunctions = (document.getElementById("CalculatedFormula_functions") as HTMLElement)
-
+		this.calculatedFormula = $("#CalculatedFormula")[0]
 	}
 	private activeObserver: Observable<boolean>
 	private isActive = false;
-	private betterForumlatabButton;
-	private advancedForumlatabButton;
-	private advancedForumla;
 	private calculatedFormula
-	private calculatedFormulaHeader
-	private calculatedFormulaFooter
-	private calculatedFormulaFunctions
 	private subscriber(observer){
-		this.showHide(observer,this.betterForumlatabButton,this.advancedForumlatabButton,true);
-		this.showHide(observer,this.advancedForumlatabButton,this.betterForumlatabButton,false);
-	}
-	private showHide(observer,activeBt,inactiveBT,state){
-		activeBt.addEventListener("click",(event)=>{
-			event.preventDefault();
-			this.isActive = state;
-			activeBt.className = "currentTab";
-			inactiveBT.className = "";
-			// this.advancedForumla.style.display = state ? "none" : "block"
-			this.calculatedFormula.style.display = state ? "none" : "block"
-			this.calculatedFormulaHeader.style.display = state ? "none" : "block"
-			this.calculatedFormulaFooter.style.display = state ? "none" : "block"
-			this.calculatedFormulaFunctions.style.display = state ? "none" : "block"
+		if(localStorage.betterFormula == "true"){
+			localStorage.betterFormula = false
+			this.isActive = true
+			$(".miniTabList .currentTab").removeClass("currentTab")
+			$(".launch-better-formula").parent().addClass("currentTab")
 			observer.next(this.isActive)
-		});
+		}
+		$(".miniTabList a").click((event) => {
+			var target = $(event.target)
+			if(target.html() == "Better Formula"){
+				var currentTab = $(".miniTabList .currentTab a")
+				if(currentTab.html() == "Simple Formula"){
+					localStorage.betterFormula = true;
+					FormulaEditor.switchMode('advanced')
+				}else{
+					currentTab.parent().removeClass("currentTab")
+					target.parent().addClass("currentTab")
+					this.isActive = true
+					observer.next(this.isActive)
+				}
+			}else if(target.html() == "Advanced Formula" && this.isActive){
+				var currentTab = $(".miniTabList .currentTab a")
+				currentTab.parent().removeClass("currentTab")
+				target.parent().addClass("currentTab")
+				this.isActive = false
+				observer.next(this.isActive)
+			}
+
+		})
 	}
 	public getTabActivatorObservable(): Observable<boolean>{
 		return this.activeObserver
