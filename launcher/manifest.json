@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+  "name": "Faster Than Lightning (Admin)",
+  "description": "This extension Improved Saleforce UI",
+  "version": "1.0",
+  "content_scripts": [
+    {
+      "matches": ["*://*.salesforce.com/**"],
+      "css": [],
+      "js": ["helper.js","setup.js","loader.js"],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "activeTab"
+  ]
+}
