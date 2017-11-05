@@ -28,8 +28,6 @@ export class Completions {
 				childrenMap[val][childEl.key] = [childEl.key,"MetaData",childEl.labelName]
         	})
         }
-        console.log("fieldsMap")
-        console.log(fieldsMap)
         return [fieldsMap,childrenMap];
     }
     private static buildChildren(el,childrenMap,rootElement){

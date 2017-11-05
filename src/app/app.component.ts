@@ -8,17 +8,13 @@ declare var fieldTreeController,FormulaEditor,$
   `
 })
 export class AppComponent implements OnInit  {
-  title = 'app';
-  activate: boolean = false;
-  constructor(private tabService: TabService){
-  	console.log("started");
-    this.calculatedFormula = $("#CalculatedFormula")[0]
-
-  }
+  private activate: boolean = false;
   private calculatedFormula
+  constructor(private tabService: TabService){
+    this.calculatedFormula = $("#CalculatedFormula")[0]
+  }
   ngOnInit() {
     this.tabService.getTabActivatorObservable().subscribe(value => this.handleTabChange(value))
-
   }
   private handleTabChange(value){
     this.activate = value
@@ -26,6 +22,5 @@ export class AppComponent implements OnInit  {
       $("#CalculatedFormula").hide()
     else
       $("#CalculatedFormula").show()
-
   }
 }
