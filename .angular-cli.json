@@ -21,7 +21,7 @@
       "styles": [
         "styles.css"
       ],
-      "scripts": ["../node_modules/ace-builds/src-noconflict/ace.js","../node_modules/ace-builds/src-noconflict/theme-idle_fingers.js","../node_modules/ace-builds/src-noconflict/ext-language_tools.js"],
+      "scripts": ["../node_modules/jquery/dist/jquery.min.js","../node_modules/ace-builds/src-noconflict/ace.js","../node_modules/ace-builds/src-noconflict/theme-idle_fingers.js","../node_modules/ace-builds/src-noconflict/ext-language_tools.js"],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

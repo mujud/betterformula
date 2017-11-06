@@ -7,7 +7,6 @@ if((document.getElementsByClassName("formulaEditorOuter").length ==  1) || (docu
 				"scripts.bundle.js",
 				"polyfills.bundle.js",
 				"inline.bundle.js",
-				"https://code.jquery.com/jquery-3.2.1.min.js",
 			];
 	loadScripts(base,devJs);
 }

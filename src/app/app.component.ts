@@ -8,7 +8,7 @@ declare var fieldTreeController,FormulaEditor,$
   `
 })
 export class AppComponent implements OnInit  {
-  private activate: boolean = false;
+  activate: boolean = false;
   private calculatedFormula
   constructor(private tabService: TabService){
     this.calculatedFormula = $("#CalculatedFormula")[0]

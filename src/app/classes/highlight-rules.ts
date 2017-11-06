@@ -42,7 +42,7 @@ export class HighlightRules  {
             "DATE|DATEVALUE|CASE|BR|IF|HYPERLINK|CONTAINS|CEILING|SUBSTITUTE"
             );
             var builtinConstants = (
-                "true|false|inf|Inf|nan|NaN|eps|pi|ans|nargin|nargout|varargin|varargout"
+                "true|null|false|inf|Inf|nan|NaN|eps|pi|ans|nargin|nargout|varargin|varargout"
             );
             var builtinFunctions = (
                 "abs|accumarray"

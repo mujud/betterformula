@@ -1,10 +1,7 @@
 function loadScripts(base,urls) {
   var url = base;
   var endpoint = urls.pop();
-  if(endpoint.indexOf("http") == 0)
-    url = endpoint;
-  else
-    url += endpoint;
+  url += endpoint;
   var script = makeScript(url,function(){
     if(urls.length > 0)
       loadScripts(base,urls);
@@ -13,6 +10,29 @@ function loadScripts(base,urls) {
 }
 function makeScript(url,completeCallback){
   var script = document.createElement('script');
+  var done = false;
+  script.src = url;
+  script.onload = script.onreadystatechange = function(){
+     if ( !done && (!this.readyState ||
+          this.readyState == "loaded" || this.readyState == "complete") ) {
+       done = true;
+       completeCallback();
+    }
+  };
+  return script;
+}
+function loadStyles(base,urls){
+  var url = base;
+  var endpoint = urls.pop();
+  url += endpoint;
+  var script = makeStyle(url,function(){
+    if(urls.length > 0)
+      loadStyles(base,urls);
+  });
+  document.head.appendChild(script);
+}
+function makeStyle(url,completeCallback){
+  var script = document.createElement('style');
   var done = false;
   script.src = url;
   script.onload = script.onreadystatechange = function(){
