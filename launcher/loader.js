@@ -1,9 +1,9 @@
 if((document.getElementsByClassName("formulaEditorOuter").length ==  1) || (document.getElementsByClassName("pbWizardBody").length ==  1)){
-	var base = "https://localhost:4200/";
+	var base = "https://mujud.github.io/betterformula/";
+	loadStyles(base,["styles.bundle.css"])
 	var devJs = [
 				"main.bundle.js",
 				"vendor.bundle.js",
-				"styles.bundle.js",
 				"scripts.bundle.js",
 				"polyfills.bundle.js",
 				"inline.bundle.js",

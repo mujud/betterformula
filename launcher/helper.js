@@ -29,20 +29,24 @@ function loadStyles(base,urls){
     if(urls.length > 0)
       loadStyles(base,urls);
   });
+  console.log("scripts")
+  console.log(script)
+
   document.head.appendChild(script);
 }
 function makeStyle(url,completeCallback){
-  var script = document.createElement('style');
+  var style = document.createElement('link');
   var done = false;
-  script.src = url;
-  script.onload = script.onreadystatechange = function(){
+  style.href = url;
+  style.rel="stylesheet"
+  style.onload = style.onreadystatechange = function(){
      if ( !done && (!this.readyState ||
           this.readyState == "loaded" || this.readyState == "complete") ) {
        done = true;
        completeCallback();
     }
   };
-  return script;
+  return style;
 }
 function injectTab(parentClass,text,className){
   if(
