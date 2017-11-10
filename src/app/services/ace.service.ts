@@ -18,6 +18,7 @@ export class AceService {
     $("input[name='addToFormula']").click(_ =>setTimeout(() => this.editor.setValue(el.value,1)))
   }
   private initEditor(el: HTMLInputElement){
+    $("#bt-frmla").html(el.value)
     this.editor = ace.edit("bt-frmla")
     this.editor.setTheme("ace/theme/idle_fingers")
     this.editor.session.setMode("ace/mode/betterformula")
@@ -26,7 +27,7 @@ export class AceService {
         enableSnippets: false,
         enableLiveAutocompletion: false
     })
-    this.editor.setValue(el.value,1)
+    //this.editor.setValue(el.value,1)
     //update text area everytime the editor content to change to kee in sync
     this.editor.getSession().on('change', _ =>el.value = this.editor.getValue())
     //keep cursor position in sync between textarea and editor to allow for insert functionality
