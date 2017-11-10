@@ -65,6 +65,19 @@ export class AceService {
         exports.Mode = Mode.factory(require)
     })
     ace.require("ace/mode/betterformula")
-    ace.require("ace/ext/language_tools")
+    var langTools = ace.require("ace/ext/language_tools")
+    langTools.setCompleters(this.updateLanCompleter());
+  }
+  private updateLanCompleter = function(){
+    return [{
+      getCompletions: function(editor, session, pos, prefix, callback) {
+        if (session.$mode.completer) {
+            return session.$mode.completer.getCompletions(editor, session, pos, prefix, callback);
+        }
+        var state = editor.session.getState(pos.row);
+        var completions = session.$mode.getCompletions(state, session, pos, prefix);
+        callback(null, completions);
+      }
+    }]
   }
 }
