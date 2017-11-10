@@ -9,6 +9,7 @@ declare var $
 @Injectable()
 export class AceService {
   private editor
+  private autocompleteTimer
   public init(el: HTMLInputElement){
     this.defineAceSyntax()
     this.initEditor(el)
@@ -20,7 +21,7 @@ export class AceService {
   private initEditor(el: HTMLInputElement){
     $("#bt-frmla").html(el.value)
     this.editor = ace.edit("bt-frmla")
-    
+
     this.editor.setTheme("ace/theme/idle_fingers")
     this.editor.session.setMode("ace/mode/betterformula")
     this.editor.setOptions({
@@ -30,7 +31,10 @@ export class AceService {
     })
     //this.editor.setValue(el.value,1)
     //update text area everytime the editor content to change to kee in sync
-    this.editor.getSession().on('change', _ =>el.value = this.editor.getValue())
+    this.editor.getSession().on('change', _ =>{
+      el.value = this.editor.getValue()
+      this.editor.execCommand("startAutocomplete");
+    })
     //keep cursor position in sync between textarea and editor to allow for insert functionality
     this.editor.getSelection().on('changeCursor', _ => this.updateCursorPosition(el))
   }
