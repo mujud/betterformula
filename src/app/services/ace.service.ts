@@ -20,7 +20,7 @@ export class AceService {
   private initEditor(el: HTMLInputElement){
     $("#bt-frmla").html(el.value)
     this.editor = ace.edit("bt-frmla")
-    this.editor.setBehavioursEnabled(true)
+    
     this.editor.setTheme("ace/theme/idle_fingers")
     this.editor.session.setMode("ace/mode/betterformula")
     this.editor.setOptions({
@@ -33,8 +33,6 @@ export class AceService {
     this.editor.getSession().on('change', _ =>el.value = this.editor.getValue())
     //keep cursor position in sync between textarea and editor to allow for insert functionality
     this.editor.getSelection().on('changeCursor', _ => this.updateCursorPosition(el))
-    console.log("this.editor");
-    console.log(this.editor);
   }
   private updateCursorPosition(el){
       var position = this.editor.getCursorPosition()
