@@ -314,6 +314,11 @@ export class Completions {
 			    "Text function",
 			    "Substitutes new text for old text in a text string."
 			],
+			"ISPICKVAL": [
+			    "ISPICKVAL(${1:picklist_field},${2:text_literal})",
+			    "Boolean function",
+			    "Determines if the value of a picklist field is equal to a text literal you specify."
+			],
 			"PRIORVALUE": [
 			    "PRIORVALUE(${1:field})",
 			    "Data function",
