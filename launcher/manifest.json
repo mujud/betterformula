@@ -8,7 +8,11 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.salesforce.com/**"],
+      "matches": [
+        "*://*.salesforce.com/**",
+        "*://*.force.com/**",
+        "*://*.lightning.force.com/**"
+      ],
       "css": [],
       "js": ["helper.js","setup.js","loader.js"],
       "all_frames": true
